@@ -62,7 +62,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Sidebar Configuration
-st.sidebar.image("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80", use_column_width=True)
+st.sidebar.image("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80", width="stretch")
 st.sidebar.title("Automation Controls")
 
 st.sidebar.markdown("### Safety Settings")
@@ -134,7 +134,7 @@ with tabs[0]:
             "Partner Email": h.record.boss_email
         })
     df_display = pd.DataFrame(rows)
-    st.dataframe(df_display, use_container_width=True)
+    st.dataframe(df_display, width="stretch")
 
     if invalid_records:
         st.warning(f"⚠️ {len(invalid_records)} records failed ingestion validation:")
@@ -213,7 +213,7 @@ with tabs[2]:
                 "Generation Method": e.generation_method,
                 "Notes": e.error_details or "OK"
             })
-        st.dataframe(pd.DataFrame(res_rows), use_container_width=True)
+        st.dataframe(pd.DataFrame(res_rows), width="stretch")
 
 # ----------------- TAB 4: AUDIT LOG -----------------
 with tabs[3]:
@@ -223,7 +223,7 @@ with tabs[3]:
 
     if entries:
         audit_df = pd.DataFrame([e.model_dump() for e in entries])
-        st.dataframe(audit_df.sort_values(by="timestamp", ascending=False), use_container_width=True)
+        st.dataframe(audit_df.sort_values(by="timestamp", ascending=False), width="stretch")
         
         csv_data = audit_df.to_csv(index=False).encode("utf-8")
         st.download_button(
